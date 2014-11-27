@@ -1,0 +1,41 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+
+{% block extracss %}
+
+  li.challenge {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin: 1em 0;
+    box-shadow: 0px 0px 0px 1px #FFF inset;
+    background: none repeat scroll 0% 0% #FFF;
+    border-bottom: 1px solid #DDD;
+    list-style: outside none none;
+    font-size: 1.4em;
+    padding-left: 1em;
+  }
+  
+  li.challenge a {
+    color: rgb(72, 72, 72);
+  }
+  
+{% endblock %}
+
+{% block content %}
+          
+<main role="main" class="events-main">
+  <div class="row">
+    <div class="large-12 columns align-left">
+    <h1 id="title">Reps challenges</h1>
+    
+    <div class="large-12 columns">
+      <ul>
+        <li class="challenge"><a href="{% url 'event-metrics' %}">Event metrics</a></li>
+      </ul>
+    </div>
+    
+    </div>
+  </div>
+</main>
+
+{% endblock %}

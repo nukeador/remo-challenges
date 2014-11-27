@@ -1,0 +1,47 @@
+name: remo-challenges
+
+ignores:
+  - ".git"
+  - "*.pyc"
+  - "*.pyo"
+  - "*.swp"
+  - "settings_local.py"
+  - "/static"
+  - "/bin/"
+  - "/include/"
+  - "/lib/"
+  - "/local/"
+  - "/man/"
+  - "/data/"
+  - "*~"
+
+env:
+  DJANGO_SETTINGS_MODULE: remo_challenges.settings
+  PIP_REQUIREMENTS_FILE: requirements.txt
+
+mem: 128M
+
+processes:
+    web: $STACKATO_UWSGI --static-map /static=$HOME/static/
+
+services:
+    challenges: filesystem
+    
+hooks:
+  post-staging:
+    - ln -s "$STACKATO_FILESYSTEM_CHALLENGES" data
+    - python manage.py syncdb --noinput
+    - python manage.py collectstatic --noinput
+    - python manage.py migrate --noinput
+    - python manage.py fetch_data init_mentors
+    - python manage.py fetch_data update
+    - python manage.py fetch_data update_events goals metrics
+
+framework:
+  type: python
+  start-file: remo_challenges/wsgi.py
+  runtime: python27
+  
+cron:
+  - "* */6 * * * python $HOME/manage.py fetch_data update"
+  - "0 0 * * * python $HOME/manage.py fetch_data update_events goals metrics"

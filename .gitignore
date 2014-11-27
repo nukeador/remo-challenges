@@ -1,0 +1,13 @@
+*.pyc
+*.pid
+true
+cache
+settings_local.py
+/static
+/bin/
+/include/
+/lib/
+/local/
+/man/
+/data/
+reps.json
