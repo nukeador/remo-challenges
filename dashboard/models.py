@@ -39,6 +39,7 @@ class Rep(models.Model):
     mentor = models.ForeignKey('self', blank=True, null=True)
     country = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
+    twitter = models.CharField(max_length=100, blank=True, null=True)
     last_report_date = models.DateField()
     deleted = models.BooleanField(default=False)
     updated_date = models.DateTimeField()

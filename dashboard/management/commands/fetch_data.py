@@ -15,7 +15,6 @@ PROJECT_PATH = realpath(join(dirname(__file__), '../../../'))
 BASE_URL = 'https://reps.mozilla.org'
 URL = '/api/v1/rep/?format=json&limit=0'
 URL_EVENTS = '/api/v1/event/?format=json&limit=0'
-FILE = PROJECT_PATH + '/reps.json'
 
 class Command(BaseCommand):
     args = '<init_mentors updte>'
@@ -55,6 +54,7 @@ class Command(BaseCommand):
                         r.profile_url = d['profile']['profile_url']
                         r.country = d['profile']['country']
                         r.city = d['profile']['city']
+                        r.twitter = d['profile']['twitter_account']
                         r.last_report_date = last_report_date
                         r.updated_date = timezone.now()
                         
@@ -72,6 +72,7 @@ class Command(BaseCommand):
                             mentor = None,
                             country = d['profile']['country'],
                             city = d['profile']['city'],
+                            twitter = d['profile']['twitter_account'],
                             last_report_date = last_report_date,
                             updated_date = timezone.now(),
                         )
@@ -99,10 +100,6 @@ class Command(BaseCommand):
                     raise CommandError('Invalid Response')
         
                 data = response.json()
-                
-                # to local file
-                with open(FILE, "w") as outfile:
-                    json.dump(data, outfile)
                 
                 # to database
                 reps = Rep.objects.filter(deleted=False).order_by('uri')
@@ -135,6 +132,7 @@ class Command(BaseCommand):
                         r.mentor = mentor
                         r.country = d['profile']['country']
                         r.city = d['profile']['city']
+                        r.twitter = d['profile']['twitter_account']
                         r.last_report_date = last_report_date
                         r.updated_date = timezone.now()
                         
@@ -152,6 +150,7 @@ class Command(BaseCommand):
                             mentor = mentor,
                             country = d['profile']['country'],
                             city = d['profile']['city'],
+                            twitter = d['profile']['twitter_account'],
                             last_report_date = last_report_date,
                             updated_date = timezone.now(),
                         )
