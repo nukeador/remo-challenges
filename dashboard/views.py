@@ -39,12 +39,15 @@ def event_metrics(request):
     # Percentage of pending events
     pending = 100 - round( need_metrics.count() * 100.0 / events.count(), 2 )
     
+    # Reps who completed their metrics
+    awesome_reps = Rep.objects.filter(event__start__gte=datetime.datetime(2014, 6, 16, 0, 0, 0, 0), event__start__lt=end_date).exclude(event__actual_attendance=None).annotate(num_events=Count('event')).order_by('-num_events')[:5]
     
     context = {
         'events': events,
         'need_metrics': need_metrics,
         'pending': pending,
         'end_date': end_date,
+        'reps': awesome_reps,
     }
     
     return render(request, 'dashboard/event-metrics.html', context)
