@@ -40,7 +40,7 @@ def event_metrics(request):
     pending = 100 - round( need_metrics.count() * 100.0 / events.count(), 2 )
     
     # Reps who completed their metrics
-    awesome_reps = Rep.objects.filter(deleted=False, event__start__gte=datetime.datetime(2014, 6, 16, 0, 0, 0, 0), event__start__lt=end_date, event__actual_attendance__gte=0).annotate(num_events=Count('event')).order_by('-num_events')[:5]
+    awesome_reps = Rep.objects.filter(deleted=False, event__start__gte=datetime.datetime(2014, 6, 16, 0, 0, 0, 0), event__start__lt=end_date, event__actual_attendance__gte=0).annotate(num_events=Count('event')).order_by('-num_events')[:10]
     
     context = {
         'events': events,
