@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load static %}
 <!DOCTYPE html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7]>
@@ -27,7 +28,7 @@
   <link rel="shortcut icon" href="//reps.mozilla.org/static/base/img/remo/shortcut.ico" />
   <!-- Included CSS Files -->
   <link href="//mozorg.cdn.mozilla.net/media/css/tabzilla-min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="//reps.mozilla.org/static/CACHE/css/c971b725a08d.css" type="text/css" media="screen,projection,tv" />
+  <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css" media="screen,projection,tv" />
   <!--[if lt IE 9]>
       <link rel="stylesheet" href="//reps.mozilla.org/static/CACHE/css/c9376f869531.css" type="text/css" media="screen,projection,tv" />  <![endif]-->
   <!-- IE Fix for HTML5 Tags -->
@@ -37,8 +38,11 @@
   <!-- Bing ownership verification -->
   <meta name="msvalidate.01" content="B7B177115A634927D608514DA17B2574" />
 
-     <!-- our css is always last to override stuff -->
-  <link rel="stylesheet" href="//reps.mozilla.org/static/CACHE/css/205836559410.css" type="text/css" media="screen,projection,tv" />
+  <link rel="stylesheet" href="{% static 'css/reps.css' %}" type="text/css" media="screen,projection,tv" />
+  
+  <!-- our css is always last to override stuff -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="screen,projection,tv" />
+  
   <style type="text/css">{% block extracss %}{% endblock %}</style>
   
   {% block extrajs %}{% endblock %}
@@ -149,8 +153,10 @@
   </footer>
 
 <!-- Included JS Files -->
-  <script type="text/javascript" src="//reps.mozilla.org/static/CACHE/js/346056457a68.js"></script>  <script src="//mozorg.cdn.mozilla.net/tabzilla/tabzilla.js"></script>
-    <script type="text/javascript" src="//reps.mozilla.org/static/CACHE/js/3d1a8503c40a.js"></script>  <script type="text/javascript" src="//reps.mozilla.org/static/CACHE/js/fbb1dd401775.js"></script> 
+  <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+  <script src="//mozorg.cdn.mozilla.net/tabzilla/tabzilla.js"></script>
+  <script type="text/javascript" src="{% static 'js/tables.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/reps.js' %}"></script> 
 </body>
 
 </html>
