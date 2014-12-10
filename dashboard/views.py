@@ -31,10 +31,10 @@ def event_metrics(request):
     end_date = datetime.datetime.now() - datetime.timedelta(days=3)
     
     # Get events between Jan. 2014 and today.
-    events = Event.objects.filter(start__gte=datetime.datetime(2014, 6, 16, 0, 0, 0, 0), start__lt=end_date).order_by('start')
+    events = Event.objects.filter(deleted=False, start__gte=datetime.datetime(2014, 6, 16, 0, 0, 0, 0), start__lt=end_date).order_by('start')
     
     # Events that haven't filled post-event metrics, we exclude deleted Reps.
-    need_metrics = Event.objects.filter(actual_attendance=None, start__gte=datetime.datetime(2014, 6, 16, 0, 0, 0, 0), start__lt=end_date).order_by('owner__first_name').exclude(owner=None)
+    need_metrics = Event.objects.filter(deleted=False, actual_attendance=None, start__gte=datetime.datetime(2014, 6, 16, 0, 0, 0, 0), start__lt=end_date).order_by('owner__first_name').exclude(owner=None)
     
     # Percentage of pending events
     pending = 100 - round( need_metrics.count() * 100.0 / events.count(), 2 )
