@@ -83,7 +83,7 @@
             {% for e in need_metrics %}
             <tr>
               <td class="hide-for-small-down" id="{{ e.owner|slugify }}"><a href="{{ e.owner.profile_url }}"><img src="{{ e.owner.avatar_url }}" alt="{{ e.owner }}" class="avatar"/></a></td>
-              <td>{% if e.owner.twitter|length > 0 %}<a class="twitter" title="Tweet him/her!" href="http://twitter.com/share?text=@{{ e.owner.twitter }} {{'we are '}}{{ pending }}{{'% to complete all #remo-metrics We need your help!'|urlencode}}&url={{request.build_absolute_uri}}{{ '#'|urlencode }}{{ e.owner|slugify }}">Tweet him/her!</a>{% endif %}</td>
+              <td>{% if e.owner.twitter|length > 0 %}<a class="twitter" title="Tweet him/her!" href="http://twitter.com/share?text=@{{ e.owner.twitter }} {{'we are '}}{{ pending }}{{'% to complete all #remometrics We need your help!'|urlencode}}&url={{request.build_absolute_uri}}{{ '#'|urlencode }}{{ e.owner|slugify }}">Tweet him/her!</a>{% endif %}</td>
               <td><a href="{{ e.owner.profile_url }}">{{ e.owner }}</a></td>
               <td class="hide-for-medium-down">{% if e.budget_bug_id %}<a href="https://bugzilla.mozilla.org/show_bug.cgi?id={{ e.budget_bug_id }}">{{ e.budget_bug_id }}</a>{% else %}No{% endif %}</td>
               <td><a href="{{ e.url }}">{{ e.name }}</a></td>
